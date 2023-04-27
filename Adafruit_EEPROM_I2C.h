@@ -7,7 +7,11 @@
 #define _ADAFRUIT_EEPROM_I2C_H_
 
 #include <Adafruit_I2CDevice.h>
+#include <Adafruit_I2CDeviceSoft.h>
 #include <Arduino.h>
+#include <PicI2C.h>
+
+using pic_i2c::SoftI2C;
 
 ///<* 1010 + A2 + A1 + A0 = 0x50 default */
 #define EEPROM_DEFAULT_ADDRESS (0x50)
@@ -22,7 +26,7 @@ public:
 
     bool begin(uint8_t addr = EEPROM_DEFAULT_ADDRESS, TwoWire* theWire = &Wire);
 
-    virtual bool begin(SoftTwoWire* wire, uint8_t i2c_addr = EEPROM_DEFAULT_ADDRESS) {
+    virtual bool begin(SoftI2C* wire, uint8_t i2c_addr = EEPROM_DEFAULT_ADDRESS) {
         this->i2c_dev = new Adafruit_I2CDeviceSoft(i2c_addr, wire);
         this->_addr = i2c_addr;
         return (this->i2c_dev->begin());
