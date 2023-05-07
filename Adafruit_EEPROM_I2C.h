@@ -74,6 +74,9 @@ public:
         return n;
     }
 
+    virtual Adafruit_I2CDevice* getI2CDevice() { return this->i2c_dev; };
+    virtual uint8_t getI2CAddress() { return this->_addr; };
+
 protected:
     /*! The internal I2C device for communication */
     Adafruit_I2CDevice* i2c_dev = NULL;
